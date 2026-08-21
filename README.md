@@ -16,5 +16,10 @@ La aplicación cuenta con un formulario para ingresar el nombre, la descripción
 
 Figma: https://www.figma.com/proto/xmvsIKl0WgVHIFQlZhcvd1/VidaFit?node-id=4-2&t=gm7wYD5lntqsS1Bj-1
 
+
 Trello
 https://trello.com/b/BDh2gboo/proyecto-estefania
+
+## Deploy
+https://estefaniamancipem.github.io/Proyecto-Final-Estefania/
+

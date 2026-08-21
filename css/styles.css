@@ -245,3 +245,34 @@ body {
         flex-direction: column;
     }
 }
+/* Botón para cambiar el estado de la tarea */
+.boton-completar {
+    font-weight: 600;
+}
+
+/* Apariencia de una tarea completada */
+.tarea-completada {
+    background-color: #eef4e7;
+    border-color: var(--verde-oliva);
+    border-left-color: var(--verde-oliva);
+    opacity: 0.85;
+}
+
+/* Título de una tarea completada */
+.tarea-completada .card-title {
+    color: var(--verde-oliva);
+    text-decoration: line-through;
+}
+
+/* Descripción completada */
+.tarea-completada .card-text {
+    text-decoration: line-through;
+}
+
+/* Transición visual */
+.tarjeta-tarea {
+    transition:
+        background-color 0.25s ease,
+        border-color 0.25s ease,
+        opacity 0.25s ease;
+}

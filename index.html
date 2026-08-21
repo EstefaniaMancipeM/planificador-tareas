@@ -10,13 +10,13 @@
 
     <title>Mis pendientes</title>
 
-    <!-- Bootstrap 5 conectado mediante CDN -->
+    <!-- Bootstrap 5 -->
     <link
         href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
         rel="stylesheet"
     >
 
-    <!-- Hoja de estilos propia -->
+    <!-- Estilos propios -->
     <link rel="stylesheet" href="css/styles.css">
 </head>
 
@@ -24,7 +24,7 @@
     <main class="container my-5">
         <div class="agenda">
 
-            <!-- Encabezado de la aplicación -->
+            <!-- Encabezado principal -->
             <header class="encabezado">
                 <div>
                     <h1>Mis pendientes</h1>
@@ -39,17 +39,24 @@
                 </span>
             </header>
 
-            <!-- Contenido principal -->
             <div class="row g-4 contenido">
 
-                <!-- Formulario para registrar tareas -->
+                <!-- Formulario para ingresar una tarea -->
                 <section class="col-lg-5">
                     <div class="nota">
                         <div class="cinta"></div>
 
                         <h2>Nueva tarea</h2>
 
-                        <form>
+                        <!-- Alerta de validación -->
+                        <div
+                            id="errorAlert"
+                            class="alert alert-danger d-none"
+                            role="alert"
+                        ></div>
+
+                        <form id="taskForm" novalidate>
+
                             <!-- Nombre -->
                             <div class="mb-3">
                                 <label
@@ -84,8 +91,9 @@
                                 ></textarea>
                             </div>
 
-                            <!-- Fecha y estado -->
                             <div class="row">
+
+                                <!-- Fecha de entrega -->
                                 <div class="col-md-6 mb-3">
                                     <label
                                         for="taskDate"
@@ -101,6 +109,7 @@
                                     >
                                 </div>
 
+                                <!-- Estado -->
                                 <div class="col-md-6 mb-3">
                                     <label
                                         for="taskStatus"
@@ -132,7 +141,7 @@
                                 </div>
                             </div>
 
-                            <!-- Botón principal -->
+                            <!-- Botón del formulario -->
                             <button
                                 type="submit"
                                 class="btn boton-tierra"
@@ -154,7 +163,8 @@
                             <h2>Esta semana</h2>
 
                             <p>
-                                Tareas que quiero organizar durante los próximos días.
+                                Tareas que quiero organizar durante los
+                                próximos días.
                             </p>
                         </div>
 
@@ -163,17 +173,17 @@
                         </span>
                     </div>
 
-                    <!-- Contenedor de las tarjetas -->
                     <div class="row g-3">
 
                         <!-- Tarjeta 1 -->
                         <div class="col-12">
                             <article class="card tarjeta-tarea">
                                 <div class="card-body">
+
                                     <div class="encabezado-tarea">
                                         <h3 class="card-title">
-                                            Practicar Portugues
-                                                                        </h3>
+                                            Practicar portugués
+                                        </h3>
 
                                         <span class="badge estado-pendiente">
                                             Pendiente
@@ -181,13 +191,27 @@
                                     </div>
 
                                     <p class="card-text">
-                                        Resolver los ejercicios de ciclos y
-                                        condicionales vistos durante la clase.
+                                        Repasar vocabulario y completar una
+                                        lección de práctica.
                                     </p>
 
                                     <p class="fecha-tarea mb-0">
-                                        Fecha de entrega: 18 de agosto de 2026
+                                        Fecha de entrega:
+                                        18 de agosto de 2026
                                     </p>
+
+                                    <button
+                                        type="button"
+                                        class="
+                                            btn
+                                            btn-outline-success
+                                            boton-completar
+                                            mt-3
+                                        "
+                                    >
+                                        Marcar como completada
+                                    </button>
+
                                 </div>
                             </article>
                         </div>
@@ -196,10 +220,10 @@
                         <div class="col-12">
                             <article class="card tarjeta-tarea">
                                 <div class="card-body">
+
                                     <div class="encabezado-tarea">
                                         <h3 class="card-title">
-                                            Organizar el mercado 
-
+                                            Organizar el mercado
                                         </h3>
 
                                         <span class="badge estado-proceso">
@@ -208,13 +232,27 @@
                                     </div>
 
                                     <p class="card-text">
-                                        Separar las guías y los ejercicios en
-                                        carpetas según cada módulo.
+                                        Preparar la lista de alimentos y
+                                        productos necesarios para la semana.
                                     </p>
 
                                     <p class="fecha-tarea mb-0">
-                                        Fecha de entrega: 19 de agosto de 2026
+                                        Fecha de entrega:
+                                        19 de agosto de 2026
                                     </p>
+
+                                    <button
+                                        type="button"
+                                        class="
+                                            btn
+                                            btn-outline-success
+                                            boton-completar
+                                            mt-3
+                                        "
+                                    >
+                                        Marcar como completada
+                                    </button>
+
                                 </div>
                             </article>
                         </div>
@@ -223,10 +261,10 @@
                         <div class="col-12">
                             <article class="card tarjeta-tarea">
                                 <div class="card-body">
+
                                     <div class="encabezado-tarea">
                                         <h3 class="card-title">
                                             Repasar la clase de Java
-
                                         </h3>
 
                                         <span class="badge estado-pendiente">
@@ -235,13 +273,27 @@
                                     </div>
 
                                     <p class="card-text">
-                                        Escribir las ideas principales que
-                                        explicaré durante la presentación.
+                                        Revisar los apuntes y practicar los
+                                        ejercicios vistos durante la clase.
                                     </p>
 
                                     <p class="fecha-tarea mb-0">
-                                        Fecha de entrega: 21 de agosto de 2026
+                                        Fecha de entrega:
+                                        21 de agosto de 2026
                                     </p>
+
+                                    <button
+                                        type="button"
+                                        class="
+                                            btn
+                                            btn-outline-success
+                                            boton-completar
+                                            mt-3
+                                        "
+                                    >
+                                        Marcar como completada
+                                    </button>
+
                                 </div>
                             </article>
                         </div>
@@ -250,6 +302,7 @@
                         <div class="col-12">
                             <article class="card tarjeta-tarea">
                                 <div class="card-body">
+
                                     <div class="encabezado-tarea">
                                         <h3 class="card-title">
                                             Actualizar mi hoja de vida
@@ -266,20 +319,40 @@
                                     </p>
 
                                     <p class="fecha-tarea mb-0">
-                                        Fecha de entrega: 23 de agosto de 2026
+                                        Fecha de entrega:
+                                        23 de agosto de 2026
                                     </p>
+
+                                    <button
+                                        type="button"
+                                        class="
+                                            btn
+                                            btn-outline-success
+                                            boton-completar
+                                            mt-3
+                                        "
+                                    >
+                                        Marcar como completada
+                                    </button>
+
                                 </div>
                             </article>
                         </div>
 
-                        <!-- Tarjeta 5 -->
+                        <!-- Tarjeta 5: inicialmente completada -->
                         <div class="col-12">
-                            <article class="card tarjeta-tarea">
+                            <article
+                                class="
+                                    card
+                                    tarjeta-tarea
+                                    tarea-completada
+                                "
+                            >
                                 <div class="card-body">
+
                                     <div class="encabezado-tarea">
                                         <h3 class="card-title">
-                                            Hacer mantenimiento al pc
-                                        
+                                            Hacer mantenimiento al computador
                                         </h3>
 
                                         <span class="badge estado-finalizada">
@@ -288,13 +361,27 @@
                                     </div>
 
                                     <p class="card-text">
-                                        Diseñar la distribución inicial del
-                                        formulario y de la lista de tareas.
+                                        Organizar los archivos y eliminar los
+                                        programas que ya no utilizo.
                                     </p>
 
                                     <p class="fecha-tarea mb-0">
-                                        Fecha de entrega: 12 de agosto de 2026
+                                        Fecha de entrega:
+                                        12 de agosto de 2026
                                     </p>
+
+                                    <button
+                                        type="button"
+                                        class="
+                                            btn
+                                            btn-outline-secondary
+                                            boton-completar
+                                            mt-3
+                                        "
+                                    >
+                                        Marcar como pendiente
+                                    </button>
+
                                 </div>
                             </article>
                         </div>
@@ -305,5 +392,12 @@
             </div>
         </div>
     </main>
+
+    <!--
+        taskManager.js debe cargarse primero porque contiene
+        la clase TaskManager utilizada por index.js.
+    -->
+    <script src="js/taskManager.js"></script>
+    <script src="js/index.js"></script>
 </body>
 </html>
