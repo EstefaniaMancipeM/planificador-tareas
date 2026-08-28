@@ -24,7 +24,7 @@
     <main class="container my-5">
         <div class="agenda">
 
-            <!-- Encabezado principal -->
+            <!-- Encabezado -->
             <header class="encabezado">
                 <div>
                     <h1>Mis pendientes</h1>
@@ -41,21 +41,28 @@
 
             <div class="row g-4 contenido">
 
-                <!-- Formulario para ingresar una tarea -->
+                <!-- Formulario Nueva Tarea -->
                 <section class="col-lg-5">
                     <div class="nota">
                         <div class="cinta"></div>
 
                         <h2>Nueva tarea</h2>
 
-                        <!-- Alerta de validación -->
+                        <!-- Mensajes de validación -->
                         <div
                             id="errorAlert"
                             class="alert alert-danger d-none"
                             role="alert"
                         ></div>
 
-                        <form id="taskForm" novalidate>
+                        <!-- Mensaje de registro exitoso -->
+                        <div
+                            id="successAlert"
+                            class="alert alert-success d-none"
+                            role="alert"
+                        ></div>
+
+                        <form id="newTaskForm" novalidate>
 
                             <!-- Nombre -->
                             <div class="mb-3">
@@ -70,7 +77,7 @@
                                     type="text"
                                     class="form-control"
                                     id="taskName"
-                                    placeholder="Ej. Estudiar Bootstrap"
+                                    placeholder="Ej. Estudiar JavaScript"
                                 >
                             </div>
 
@@ -93,7 +100,7 @@
 
                             <div class="row">
 
-                                <!-- Fecha de entrega -->
+                                <!-- Fecha -->
                                 <div class="col-md-6 mb-3">
                                     <label
                                         for="taskDate"
@@ -141,7 +148,6 @@
                                 </div>
                             </div>
 
-                            <!-- Botón del formulario -->
                             <button
                                 type="submit"
                                 class="btn boton-tierra"
@@ -156,7 +162,7 @@
                     </div>
                 </section>
 
-                <!-- Lista de tareas -->
+                <!-- Lista de tareas existentes -->
                 <section class="col-lg-7">
                     <div class="titulo-lista">
                         <div>
@@ -179,7 +185,6 @@
                         <div class="col-12">
                             <article class="card tarjeta-tarea">
                                 <div class="card-body">
-
                                     <div class="encabezado-tarea">
                                         <h3 class="card-title">
                                             Practicar portugués
@@ -202,16 +207,10 @@
 
                                     <button
                                         type="button"
-                                        class="
-                                            btn
-                                            btn-outline-success
-                                            boton-completar
-                                            mt-3
-                                        "
+                                        class="btn btn-outline-success boton-completar mt-3"
                                     >
                                         Marcar como completada
                                     </button>
-
                                 </div>
                             </article>
                         </div>
@@ -220,7 +219,6 @@
                         <div class="col-12">
                             <article class="card tarjeta-tarea">
                                 <div class="card-body">
-
                                     <div class="encabezado-tarea">
                                         <h3 class="card-title">
                                             Organizar el mercado
@@ -243,16 +241,10 @@
 
                                     <button
                                         type="button"
-                                        class="
-                                            btn
-                                            btn-outline-success
-                                            boton-completar
-                                            mt-3
-                                        "
+                                        class="btn btn-outline-success boton-completar mt-3"
                                     >
                                         Marcar como completada
                                     </button>
-
                                 </div>
                             </article>
                         </div>
@@ -261,7 +253,6 @@
                         <div class="col-12">
                             <article class="card tarjeta-tarea">
                                 <div class="card-body">
-
                                     <div class="encabezado-tarea">
                                         <h3 class="card-title">
                                             Repasar la clase de Java
@@ -284,16 +275,10 @@
 
                                     <button
                                         type="button"
-                                        class="
-                                            btn
-                                            btn-outline-success
-                                            boton-completar
-                                            mt-3
-                                        "
+                                        class="btn btn-outline-success boton-completar mt-3"
                                     >
                                         Marcar como completada
                                     </button>
-
                                 </div>
                             </article>
                         </div>
@@ -302,7 +287,6 @@
                         <div class="col-12">
                             <article class="card tarjeta-tarea">
                                 <div class="card-body">
-
                                     <div class="encabezado-tarea">
                                         <h3 class="card-title">
                                             Actualizar mi hoja de vida
@@ -325,31 +309,20 @@
 
                                     <button
                                         type="button"
-                                        class="
-                                            btn
-                                            btn-outline-success
-                                            boton-completar
-                                            mt-3
-                                        "
+                                        class="btn btn-outline-success boton-completar mt-3"
                                     >
                                         Marcar como completada
                                     </button>
-
                                 </div>
                             </article>
                         </div>
 
-                        <!-- Tarjeta 5: inicialmente completada -->
+                        <!-- Tarjeta 5 -->
                         <div class="col-12">
                             <article
-                                class="
-                                    card
-                                    tarjeta-tarea
-                                    tarea-completada
-                                "
+                                class="card tarjeta-tarea tarea-completada"
                             >
                                 <div class="card-body">
-
                                     <div class="encabezado-tarea">
                                         <h3 class="card-title">
                                             Hacer mantenimiento al computador
@@ -372,16 +345,10 @@
 
                                     <button
                                         type="button"
-                                        class="
-                                            btn
-                                            btn-outline-secondary
-                                            boton-completar
-                                            mt-3
-                                        "
+                                        class="btn btn-outline-secondary boton-completar mt-3"
                                     >
                                         Marcar como pendiente
                                     </button>
-
                                 </div>
                             </article>
                         </div>
@@ -394,8 +361,7 @@
     </main>
 
     <!--
-        taskManager.js debe cargarse primero porque contiene
-        la clase TaskManager utilizada por index.js.
+        taskManager.js debe cargarse antes que index.js.
     -->
     <script src="js/taskManager.js"></script>
     <script src="js/index.js"></script>

@@ -1,123 +1,204 @@
-// Crear una instancia de TaskManager
+// Crear una sola instancia de TaskManager
 const taskManager = new TaskManager();
 
-// Comprobar que la colección comienza vacía
-console.log(taskManager.tasks);
+// Seleccionar elementos del documento
+const newTaskForm =
+    document.querySelector('#newTaskForm');
 
-// Seleccionar elementos del formulario
-const taskForm = document.querySelector('#taskForm');
-const errorAlert = document.querySelector('#errorAlert');
+const errorAlert =
+    document.querySelector('#errorAlert');
 
-// Validar los datos del formulario
+const successAlert =
+    document.querySelector('#successAlert');
+
+// Validar la información del formulario
 function validateFormFields(data) {
     const errors = [];
 
     if (data.name === '') {
-        errors.push('El nombre de la tarea es obligatorio.');
+        errors.push(
+            'El nombre de la tarea es obligatorio.'
+        );
     }
 
     if (data.description === '') {
-        errors.push('La descripción es obligatoria.');
+        errors.push(
+            'La descripción es obligatoria.'
+        );
     }
 
-    if (data.date === '') {
-        errors.push('Debes seleccionar una fecha de entrega.');
+    if (data.dueDate === '') {
+        errors.push(
+            'Debes seleccionar una fecha de entrega.'
+        );
     }
 
     if (data.status === '') {
-        errors.push('Debes seleccionar un estado.');
+        errors.push(
+            'Debes seleccionar un estado.'
+        );
     }
 
     return errors;
 }
 
 // Escuchar el envío del formulario
-taskForm.addEventListener('submit', function (event) {
-    // Evitar que la página se recargue
-    event.preventDefault();
+newTaskForm.addEventListener(
+    'submit',
+    function (event) {
+        // Evitar la recarga de la página
+        event.preventDefault();
 
-    // Seleccionar los campos
-    const taskNameInput = document.querySelector('#taskName');
-    const taskDescriptionInput =
-        document.querySelector('#taskDescription');
-    const taskDateInput = document.querySelector('#taskDate');
-    const taskStatusInput = document.querySelector('#taskStatus');
+        // Recuperar los elementos del formulario
+        const taskNameInput =
+            document.querySelector('#taskName');
 
-    // Recuperar los valores
-    const formData = {
-        name: taskNameInput.value.trim(),
-        description: taskDescriptionInput.value.trim(),
-        date: taskDateInput.value,
-        status: taskStatusInput.value
-    };
+        const taskDescriptionInput =
+            document.querySelector(
+                '#taskDescription'
+            );
 
-    // Validar los datos
-    const errors = validateFormFields(formData);
+        const taskDateInput =
+            document.querySelector('#taskDate');
 
-    // Mostrar errores
-    if (errors.length > 0) {
-        errorAlert.innerHTML = errors.join('<br>');
-        errorAlert.classList.remove('d-none');
-        return;
+        const taskStatusInput =
+            document.querySelector('#taskStatus');
+
+        // Obtener los valores ingresados
+        const formData = {
+            name: taskNameInput.value.trim(),
+
+            description:
+                taskDescriptionInput.value.trim(),
+
+            dueDate: taskDateInput.value,
+
+            status: taskStatusInput.value
+        };
+
+        // Ejecutar las validaciones existentes
+        const errors =
+            validateFormFields(formData);
+
+        // Ocultar mensaje anterior de éxito
+        successAlert.classList.add('d-none');
+
+        // Impedir el registro si existen errores
+        if (errors.length > 0) {
+            errorAlert.innerHTML =
+                errors.join('<br>');
+
+            errorAlert.classList.remove('d-none');
+
+            return;
+        }
+
+        // Ocultar los errores
+        errorAlert.classList.add('d-none');
+
+        // Registrar la tarea en TaskManager
+        const newTask = taskManager.addTask(
+            formData.name,
+            formData.description,
+            formData.dueDate,
+            formData.status
+        );
+
+        // Comprobar el resultado en la consola
+        console.log(
+            'Tarea registrada:',
+            newTask
+        );
+
+        console.log(
+            'Todas las tareas:',
+            taskManager.tasks
+        );
+
+        // Mostrar confirmación
+        successAlert.textContent =
+            `Tarea registrada correctamente con id ${newTask.id}.`;
+
+        successAlert.classList.remove('d-none');
+
+        // Limpiar el formulario
+        newTaskForm.reset();
     }
+);
 
-    // Ocultar la alerta si el formulario es válido
-    errorAlert.classList.add('d-none');
-
-    console.log('Nombre:', formData.name);
-    console.log('Descripción:', formData.description);
-    console.log('Fecha:', formData.date);
-    console.log('Estado:', formData.status);
-    console.log('El formulario es válido.');
-});
-
-// Seleccionar todos los botones para completar tareas
+// Seleccionar los botones de las tarjetas
 const completeButtons =
-    document.querySelectorAll('.boton-completar');
+    document.querySelectorAll(
+        '.boton-completar'
+    );
 
-// Agregar interacción a cada botón
+// Conservar la funcionalidad de la tarea 4
 completeButtons.forEach(function (button) {
-    button.addEventListener('click', function () {
-        const taskCard = button.closest('.tarjeta-tarea');
-        const statusBadge =
-            taskCard.querySelector('.badge');
+    button.addEventListener(
+        'click',
+        function () {
+            const taskCard =
+                button.closest('.tarjeta-tarea');
 
-        // Guardar el estado original la primera vez
-        if (!statusBadge.dataset.originalText) {
-            statusBadge.dataset.originalText =
-                statusBadge.textContent.trim();
+            const statusBadge =
+                taskCard.querySelector('.badge');
 
-            statusBadge.dataset.originalClass =
-                statusBadge.className;
+            // Guardar el estado original
+            if (
+                !statusBadge.dataset.originalText
+            ) {
+                statusBadge.dataset.originalText =
+                    statusBadge.textContent.trim();
+
+                statusBadge.dataset.originalClass =
+                    statusBadge.className;
+            }
+
+            // Marcar o desmarcar la tarjeta
+            taskCard.classList.toggle(
+                'tarea-completada'
+            );
+
+            const isCompleted =
+                taskCard.classList.contains(
+                    'tarea-completada'
+                );
+
+            if (isCompleted) {
+                button.textContent =
+                    'Marcar como pendiente';
+
+                button.classList.remove(
+                    'btn-outline-success'
+                );
+
+                button.classList.add(
+                    'btn-outline-secondary'
+                );
+
+                statusBadge.className =
+                    'badge estado-finalizada';
+
+                statusBadge.textContent =
+                    'Completada';
+            } else {
+                button.textContent =
+                    'Marcar como completada';
+
+                button.classList.remove(
+                    'btn-outline-secondary'
+                );
+
+                button.classList.add(
+                    'btn-outline-success'
+                );
+
+                statusBadge.className =
+                    statusBadge.dataset.originalClass;
+
+                statusBadge.textContent =
+                    statusBadge.dataset.originalText;
+            }
         }
-
-        // Cambiar el estado visual
-        taskCard.classList.toggle('tarea-completada');
-
-        const isCompleted =
-            taskCard.classList.contains('tarea-completada');
-
-        if (isCompleted) {
-            button.textContent = 'Marcar como pendiente';
-
-            button.classList.remove('btn-outline-success');
-            button.classList.add('btn-outline-secondary');
-
-            statusBadge.className =
-                'badge estado-finalizada';
-
-            statusBadge.textContent = 'Completada';
-        } else {
-            button.textContent = 'Marcar como completada';
-
-            button.classList.remove('btn-outline-secondary');
-            button.classList.add('btn-outline-success');
-
-            statusBadge.className =
-                statusBadge.dataset.originalClass;
-
-            statusBadge.textContent =
-                statusBadge.dataset.originalText;
-        }
-    });
+    );
 });
