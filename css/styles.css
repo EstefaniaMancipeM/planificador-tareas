@@ -1,25 +1,24 @@
-/* Paleta de colores */
+/* Colores que escogí para mi planificador */
 :root {
-    --crema: #efe6d8;
+    --fondo: #efe6d8;
     --papel: #fffdf8;
-    --amarillo-claro: #f5e6c9;
+    --amarillo-suave: #f5e6c9;
     --terracota: #b86f52;
     --terracota-oscuro: #754737;
-    --verde-oliva: #778064;
-    --mostaza: #a18a52;
+    --verde: #778064;
     --cafe: #51443b;
     --cafe-claro: #7b6b5e;
-    --linea: #d8c7b5;
+    --borde: #d8c7b5;
 }
 
-/* Estilos generales */
+/* Configuración general */
 body {
-    background-color: var(--crema);
+    background-color: var(--fondo);
     color: var(--cafe);
     font-family: Arial, Helvetica, sans-serif;
 }
 
-/* Hoja principal */
+/* Contenedor parecido a una agenda */
 .agenda {
     background-color: var(--papel);
     border: 2px solid var(--cafe);
@@ -28,7 +27,7 @@ body {
     box-shadow: 8px 8px 0 rgba(81, 68, 59, 0.12);
 }
 
-/* Encabezado de la aplicación */
+/* Encabezado */
 .encabezado {
     display: flex;
     justify-content: space-between;
@@ -61,15 +60,15 @@ body {
     text-transform: uppercase;
 }
 
-/* Separación después del encabezado */
+/* Separación del contenido */
 .contenido {
     padding-top: 40px;
 }
 
-/* Nota que contiene el formulario */
+/* Papel donde está el formulario */
 .nota {
     position: relative;
-    background-color: var(--amarillo-claro);
+    background-color: var(--amarillo-suave);
     border: 2px solid var(--cafe);
     border-radius: 4px;
     padding: 42px 30px 30px;
@@ -93,12 +92,13 @@ body {
     font-weight: bold;
 }
 
-/* Campos del formulario */
+/* Etiquetas del formulario */
 .form-label {
     color: var(--cafe);
     font-weight: 600;
 }
 
+/* Campos del formulario */
 .form-control,
 .form-select {
     background-color: #fffaf0;
@@ -112,7 +112,7 @@ body {
     box-shadow: 0 0 0 0.2rem rgba(184, 111, 82, 0.2);
 }
 
-/* Botón principal */
+/* Botón para guardar */
 .boton-tierra {
     background-color: var(--terracota);
     color: white;
@@ -125,7 +125,7 @@ body {
     color: white;
 }
 
-/* Frase de la nota */
+/* Frase debajo del formulario */
 .frase {
     margin-top: 30px;
     margin-bottom: 0;
@@ -135,7 +135,7 @@ body {
     font-style: italic;
 }
 
-/* Encabezado de la lista */
+/* Título de la lista */
 .titulo-lista {
     display: flex;
     justify-content: space-between;
@@ -156,7 +156,7 @@ body {
     color: var(--cafe-claro);
 }
 
-/* Contador de tareas */
+/* Número de tareas */
 .contador-tareas {
     flex-shrink: 0;
     background-color: #e8d7bd;
@@ -167,15 +167,16 @@ body {
     font-weight: bold;
 }
 
-/* Tarjetas de Bootstrap */
+/* Tarjeta de una tarea */
 .tarjeta-tarea {
     background-color: var(--papel);
-    border: 1px solid var(--linea);
+    border: 1px solid var(--borde);
     border-left: 5px solid var(--terracota);
     border-radius: 6px;
+    transition: 0.25s;
 }
 
-/* Encabezado interno de cada tarjeta */
+/* Parte superior de cada tarjeta */
 .encabezado-tarea {
     display: flex;
     justify-content: space-between;
@@ -183,7 +184,7 @@ body {
     gap: 15px;
 }
 
-/* Título de la tarea */
+/* Nombre de la tarea */
 .tarjeta-tarea .card-title {
     margin-bottom: 12px;
     font-family: Georgia, "Times New Roman", serif;
@@ -191,38 +192,56 @@ body {
     font-weight: bold;
 }
 
-/* Descripción */
+/* Descripción de la tarea */
 .tarjeta-tarea .card-text {
     color: var(--cafe-claro);
 }
 
-/* Fecha */
+/* Fecha de entrega */
 .fecha-tarea {
     color: var(--terracota-oscuro);
     font-size: 0.9rem;
     font-weight: bold;
 }
 
-/* Estados */
+/* Estado pendiente */
 .estado-pendiente {
     flex-shrink: 0;
     background-color: #c98162;
     color: white;
 }
 
-.estado-proceso {
-    flex-shrink: 0;
-    background-color: var(--mostaza);
-    color: white;
-}
-
+/* Estado terminado */
 .estado-finalizada {
     flex-shrink: 0;
-    background-color: var(--verde-oliva);
+    background-color: var(--verde);
     color: white;
 }
 
-/* Adaptación para pantallas pequeñas */
+/* Cambio visual para una tarea terminada */
+.tarea-completada {
+    background-color: #eef4e7;
+    border-color: var(--verde);
+    border-left-color: var(--verde);
+    opacity: 0.85;
+}
+
+.tarea-completada .card-title {
+    color: var(--verde);
+    text-decoration: line-through;
+}
+
+.tarea-completada .card-text {
+    text-decoration: line-through;
+}
+
+/* Botones de las tarjetas */
+.done-button,
+.delete-button {
+    font-weight: 600;
+}
+
+/* Ajustes para celulares */
 @media (max-width: 768px) {
     .agenda {
         padding: 30px 22px;
@@ -244,35 +263,4 @@ body {
     .encabezado-tarea {
         flex-direction: column;
     }
-}
-/* Botón para cambiar el estado de la tarea */
-.boton-completar {
-    font-weight: 600;
-}
-
-/* Apariencia de una tarea completada */
-.tarea-completada {
-    background-color: #eef4e7;
-    border-color: var(--verde-oliva);
-    border-left-color: var(--verde-oliva);
-    opacity: 0.85;
-}
-
-/* Título de una tarea completada */
-.tarea-completada .card-title {
-    color: var(--verde-oliva);
-    text-decoration: line-through;
-}
-
-/* Descripción completada */
-.tarea-completada .card-text {
-    text-decoration: line-through;
-}
-
-/* Transición visual */
-.tarjeta-tarea {
-    transition:
-        background-color 0.25s ease,
-        border-color 0.25s ease,
-        opacity 0.25s ease;
 }

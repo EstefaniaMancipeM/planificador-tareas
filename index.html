@@ -16,7 +16,7 @@
         rel="stylesheet"
     >
 
-    <!-- Estilos propios -->
+    <!-- Mis estilos -->
     <link rel="stylesheet" href="css/styles.css">
 </head>
 
@@ -24,29 +24,30 @@
     <main class="container my-5">
         <div class="agenda">
 
-            <!-- Encabezado -->
+            <!-- Encabezado de mi aplicación -->
             <header class="encabezado">
                 <div>
                     <h1>Mis pendientes</h1>
 
                     <p>
-                        Pequeños pasos para una semana más tranquila.
+                        Aquí organizo las tareas que debo realizar
+                        durante la semana.
                     </p>
                 </div>
 
                 <span class="semana">
-                    Semana actual
+                    Mi semana
                 </span>
             </header>
 
             <div class="row g-4 contenido">
 
-                <!-- Formulario Nueva Tarea -->
+                <!-- Formulario para registrar tareas -->
                 <section class="col-lg-5">
                     <div class="nota">
                         <div class="cinta"></div>
 
-                        <h2>Nueva tarea</h2>
+                        <h2>Agregar una tarea</h2>
 
                         <!-- Mensajes de validación -->
                         <div
@@ -77,7 +78,7 @@
                                     type="text"
                                     class="form-control"
                                     id="taskName"
-                                    placeholder="Ej. Estudiar JavaScript"
+                                    placeholder="Ej. Terminar el taller"
                                 >
                             </div>
 
@@ -94,60 +95,50 @@
                                     class="form-control"
                                     id="taskDescription"
                                     rows="3"
-                                    placeholder="Escribe una breve descripción"
+                                    placeholder="Escribe lo que debes hacer"
                                 ></textarea>
                             </div>
 
-                            <div class="row">
+                            <!-- Fecha de entrega -->
+                            <div class="mb-3">
+                                <label
+                                    for="taskDate"
+                                    class="form-label"
+                                >
+                                    Fecha de entrega
+                                </label>
 
-                                <!-- Fecha -->
-                                <div class="col-md-6 mb-3">
-                                    <label
-                                        for="taskDate"
-                                        class="form-label"
-                                    >
-                                        Fecha de entrega
-                                    </label>
-
-                                    <input
-                                        type="date"
-                                        class="form-control"
-                                        id="taskDate"
-                                    >
-                                </div>
-
-                                <!-- Estado -->
-                                <div class="col-md-6 mb-3">
-                                    <label
-                                        for="taskStatus"
-                                        class="form-label"
-                                    >
-                                        Estado
-                                    </label>
-
-                                    <select
-                                        class="form-select"
-                                        id="taskStatus"
-                                    >
-                                        <option value="">
-                                            Selecciona una opción
-                                        </option>
-
-                                        <option value="Pendiente">
-                                            Pendiente
-                                        </option>
-
-                                        <option value="En proceso">
-                                            En proceso
-                                        </option>
-
-                                        <option value="Finalizada">
-                                            Finalizada
-                                        </option>
-                                    </select>
-                                </div>
+                                <input
+                                    type="date"
+                                    class="form-control"
+                                    id="taskDate"
+                                >
                             </div>
 
+                            <!-- Estado inicial -->
+                            <div class="mb-3">
+                                <label
+                                    for="taskStatus"
+                                    class="form-label"
+                                >
+                                    Estado
+                                </label>
+
+                                <select
+                                    class="form-select"
+                                    id="taskStatus"
+                                >
+                                    <option value="">
+                                        Selecciona el estado
+                                    </option>
+
+                                    <option value="PORHACER">
+                                        Por hacer
+                                    </option>
+                                </select>
+                            </div>
+
+                            <!-- Botón principal -->
                             <button
                                 type="submit"
                                 class="btn boton-tierra"
@@ -157,203 +148,39 @@
                         </form>
 
                         <p class="frase">
-                            Una cosa a la vez también es avanzar.
+                            Organizarme me ayuda a cumplir mis metas.
                         </p>
                     </div>
                 </section>
 
-                <!-- Lista de tareas existentes -->
+                <!-- Lista de tareas -->
                 <section class="col-lg-7">
                     <div class="titulo-lista">
                         <div>
-                            <h2>Esta semana</h2>
+                            <h2>Lista de tareas</h2>
 
                             <p>
-                                Tareas que quiero organizar durante los
-                                próximos días.
+                                Estas son las tareas que tengo registradas.
                             </p>
                         </div>
 
-                        <span class="contador-tareas">
-                            5 tareas
+                        <!-- JavaScript actualiza este número -->
+                        <span
+                            id="taskCounter"
+                            class="contador-tareas"
+                        >
+                            0 tareas
                         </span>
                     </div>
 
-                    <div class="row g-3">
-
-                        <!-- Tarjeta 1 -->
-                        <div class="col-12">
-                            <article class="card tarjeta-tarea">
-                                <div class="card-body">
-                                    <div class="encabezado-tarea">
-                                        <h3 class="card-title">
-                                            Practicar portugués
-                                        </h3>
-
-                                        <span class="badge estado-pendiente">
-                                            Pendiente
-                                        </span>
-                                    </div>
-
-                                    <p class="card-text">
-                                        Repasar vocabulario y completar una
-                                        lección de práctica.
-                                    </p>
-
-                                    <p class="fecha-tarea mb-0">
-                                        Fecha de entrega:
-                                        18 de agosto de 2026
-                                    </p>
-
-                                    <button
-                                        type="button"
-                                        class="btn btn-outline-success boton-completar mt-3"
-                                    >
-                                        Marcar como completada
-                                    </button>
-                                </div>
-                            </article>
-                        </div>
-
-                        <!-- Tarjeta 2 -->
-                        <div class="col-12">
-                            <article class="card tarjeta-tarea">
-                                <div class="card-body">
-                                    <div class="encabezado-tarea">
-                                        <h3 class="card-title">
-                                            Organizar el mercado
-                                        </h3>
-
-                                        <span class="badge estado-proceso">
-                                            En proceso
-                                        </span>
-                                    </div>
-
-                                    <p class="card-text">
-                                        Preparar la lista de alimentos y
-                                        productos necesarios para la semana.
-                                    </p>
-
-                                    <p class="fecha-tarea mb-0">
-                                        Fecha de entrega:
-                                        19 de agosto de 2026
-                                    </p>
-
-                                    <button
-                                        type="button"
-                                        class="btn btn-outline-success boton-completar mt-3"
-                                    >
-                                        Marcar como completada
-                                    </button>
-                                </div>
-                            </article>
-                        </div>
-
-                        <!-- Tarjeta 3 -->
-                        <div class="col-12">
-                            <article class="card tarjeta-tarea">
-                                <div class="card-body">
-                                    <div class="encabezado-tarea">
-                                        <h3 class="card-title">
-                                            Repasar la clase de Java
-                                        </h3>
-
-                                        <span class="badge estado-pendiente">
-                                            Pendiente
-                                        </span>
-                                    </div>
-
-                                    <p class="card-text">
-                                        Revisar los apuntes y practicar los
-                                        ejercicios vistos durante la clase.
-                                    </p>
-
-                                    <p class="fecha-tarea mb-0">
-                                        Fecha de entrega:
-                                        21 de agosto de 2026
-                                    </p>
-
-                                    <button
-                                        type="button"
-                                        class="btn btn-outline-success boton-completar mt-3"
-                                    >
-                                        Marcar como completada
-                                    </button>
-                                </div>
-                            </article>
-                        </div>
-
-                        <!-- Tarjeta 4 -->
-                        <div class="col-12">
-                            <article class="card tarjeta-tarea">
-                                <div class="card-body">
-                                    <div class="encabezado-tarea">
-                                        <h3 class="card-title">
-                                            Actualizar mi hoja de vida
-                                        </h3>
-
-                                        <span class="badge estado-proceso">
-                                            En proceso
-                                        </span>
-                                    </div>
-
-                                    <p class="card-text">
-                                        Agregar los cursos recientes y revisar
-                                        la información de contacto.
-                                    </p>
-
-                                    <p class="fecha-tarea mb-0">
-                                        Fecha de entrega:
-                                        23 de agosto de 2026
-                                    </p>
-
-                                    <button
-                                        type="button"
-                                        class="btn btn-outline-success boton-completar mt-3"
-                                    >
-                                        Marcar como completada
-                                    </button>
-                                </div>
-                            </article>
-                        </div>
-
-                        <!-- Tarjeta 5 -->
-                        <div class="col-12">
-                            <article
-                                class="card tarjeta-tarea tarea-completada"
-                            >
-                                <div class="card-body">
-                                    <div class="encabezado-tarea">
-                                        <h3 class="card-title">
-                                            Hacer mantenimiento al computador
-                                        </h3>
-
-                                        <span class="badge estado-finalizada">
-                                            Finalizada
-                                        </span>
-                                    </div>
-
-                                    <p class="card-text">
-                                        Organizar los archivos y eliminar los
-                                        programas que ya no utilizo.
-                                    </p>
-
-                                    <p class="fecha-tarea mb-0">
-                                        Fecha de entrega:
-                                        12 de agosto de 2026
-                                    </p>
-
-                                    <button
-                                        type="button"
-                                        class="btn btn-outline-secondary boton-completar mt-3"
-                                    >
-                                        Marcar como pendiente
-                                    </button>
-                                </div>
-                            </article>
-                        </div>
-
-                    </div>
+                    <!--
+                        TaskManager colocará aquí las tarjetas.
+                        Esta lista tendrá un solo EventListener.
+                    -->
+                    <div
+                        id="tasksList"
+                        class="row g-3"
+                    ></div>
                 </section>
 
             </div>
@@ -361,7 +188,8 @@
     </main>
 
     <!--
-        taskManager.js debe cargarse antes que index.js.
+        Primero cargo la clase y después
+        el archivo que controla la aplicación.
     -->
     <script src="js/taskManager.js"></script>
     <script src="js/index.js"></script>
