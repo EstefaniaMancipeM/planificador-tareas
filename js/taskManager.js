@@ -1,199 +1,116 @@
 class TaskManager {
     constructor(currentId = 0) {
-        // Aquí guardaré todas mis tareas
         this.tasks = [];
-
-        // Este número me permite crear ids diferentes
         this.currentId = currentId;
     }
 
-    // Agregar una nueva tarea
-    addTask(name, description, dueDate, status) {
-        // Aumento el contador antes de crear la tarea
+    addTask(name, description, dueDate, status = 'PORHACER') {
         this.currentId++;
-
-        const newTask = {
-            id: this.currentId,
-            name: name,
-            description: description,
-            dueDate: dueDate,
-            status: 'PORHACER'
-        };
-
-        // Guardo la nueva tarea en el arreglo
+        const newTask = { id: this.currentId, name, description, dueDate, status };
         this.tasks.push(newTask);
-
         return newTask;
     }
 
-    // Eliminar una tarea usando su id
     deleteTask(taskId) {
-        const newTasks = [];
-
-        // Recorro las tareas que tengo guardadas
-        for (let task of this.tasks) {
-            // Conservo las que tengan un id diferente
+        const remainingTasks = [];
+        for (const task of this.tasks) {
             if (task.id !== taskId) {
-                newTasks.push(task);
+                remainingTasks.push(task);
             }
         }
-
-        // Actualizo la colección
-        this.tasks = newTasks;
+        this.tasks = remainingTasks;
     }
 
-    // Buscar una tarea utilizando su id
     getTaskById(taskId) {
-        let foundTask;
-
-        for (let task of this.tasks) {
+        for (const task of this.tasks) {
             if (task.id === taskId) {
-                foundTask = task;
+                return task;
             }
         }
-
-        return foundTask;
+        return undefined;
     }
 
-    // Guardar las tareas en el navegador
+    setTasks(tasks) {
+        this.tasks = tasks;
+        let highestId = 0;
+        for (const task of tasks) {
+            if (task.id > highestId) {
+                highestId = task.id;
+            }
+        }
+        this.currentId = highestId;
+    }
+
+    // Tarea 8: guardo el arreglo y el ultimo id en localStorage.
     save() {
-        const tasksAsText =
-            JSON.stringify(this.tasks);
+        const tasksJson = JSON.stringify(this.tasks);
+        localStorage.setItem('tasks', tasksJson);
 
-        localStorage.setItem(
-            'tasks',
-            tasksAsText
-        );
-
-        localStorage.setItem(
-            'currentId',
-            this.currentId.toString()
-        );
+        const currentId = String(this.currentId);
+        localStorage.setItem('currentId', currentId);
     }
 
-    // Recuperar las tareas guardadas
+    // Tarea 8: recupero los datos al volver a abrir la pagina.
     load() {
-        const savedTasks =
-            localStorage.getItem('tasks');
+        const tasksJson = localStorage.getItem('tasks');
+        const currentId = localStorage.getItem('currentId');
 
-        const savedCurrentId =
-            localStorage.getItem('currentId');
-
-        if (savedTasks !== null) {
-            this.tasks =
-                JSON.parse(savedTasks);
+        if (tasksJson !== null) {
+            this.tasks = JSON.parse(tasksJson);
         }
-
-        if (savedCurrentId !== null) {
-            this.currentId =
-                Number(savedCurrentId);
+        if (currentId !== null) {
+            this.currentId = Number(currentId);
         }
     }
 
-    // Crear el HTML de una tarjeta
-    createTaskHtml(
-        id,
-        name,
-        description,
-        dueDate,
-        status
-    ) {
+    createTaskHtml(id, name, description, dueDate, status) {
         let statusClass = 'estado-pendiente';
         let taskClass = '';
         let doneButton = '';
 
-        // Si está terminada, cambio su apariencia
         if (status === 'DONE') {
             statusClass = 'estado-finalizada';
             taskClass = 'tarea-completada';
         } else {
-            // Si está pendiente, muestro este botón
             doneButton = `
-                <button
-                    type="button"
-                    class="done-button btn btn-success"
-                >
-                    Mark As Done
+                <button type="button" class="done-button btn btn-success">
+                    Marcar como terminada
                 </button>
             `;
         }
 
         return `
             <div class="col-12">
-                <article
-                    class="card tarjeta-tarea ${taskClass}"
-                    data-task-id="${id}"
-                >
+                <article class="card tarjeta-tarea ${taskClass}" data-task-id="${id}">
                     <div class="card-body">
-
                         <div class="encabezado-tarea">
-                            <h3 class="card-title">
-                                ${name}
-                            </h3>
-
-                            <span class="badge ${statusClass}">
-                                ${status}
-                            </span>
+                            <h3 class="card-title">${name}</h3>
+                            <span class="badge ${statusClass}">${status}</span>
                         </div>
-
-                        <p class="card-text">
-                            ${description}
-                        </p>
-
-                        <p class="fecha-tarea">
-                            Fecha de entrega: ${dueDate}
-                        </p>
-
+                        <p class="card-text">${description || 'Sin descripcion'}</p>
+                        <p class="fecha-tarea">Fecha de entrega: ${dueDate}</p>
                         <div class="d-flex gap-2 flex-wrap">
                             ${doneButton}
-
-                            <button
-                                type="button"
-                                class="delete-button btn btn-danger"
-                            >
-                                Eliminar
-                            </button>
+                            <button type="button" class="delete-button btn btn-danger">Eliminar</button>
                         </div>
-
                     </div>
                 </article>
             </div>
         `;
     }
 
-    // Mostrar las tareas en la página
     render() {
-        const tasksList =
-            document.querySelector('#tasksList');
-
-        const taskCounter =
-            document.querySelector('#taskCounter');
-
-        // Limpio la lista antes de volver a mostrarla
+        const tasksList = document.querySelector('#tasksList');
+        const taskCounter = document.querySelector('#taskCounter');
         tasksList.innerHTML = '';
 
-        // Recorro el arreglo y creo cada tarjeta
-        for (let task of this.tasks) {
-            const taskHtml =
-                this.createTaskHtml(
-                    task.id,
-                    task.name,
-                    task.description,
-                    task.dueDate,
-                    task.status
-                );
-
-            tasksList.innerHTML += taskHtml;
+        for (const task of this.tasks) {
+            tasksList.innerHTML += this.createTaskHtml(
+                task.id, task.name, task.description, task.dueDate, task.status
+            );
         }
 
-        // Actualizo el contador
         const totalTasks = this.tasks.length;
-
-        if (totalTasks === 1) {
-            taskCounter.textContent = '1 tarea';
-        } else {
-            taskCounter.textContent =
-                totalTasks + ' tareas';
-        }
+        taskCounter.textContent = totalTasks === 1 ? '1 tarea' : totalTasks + ' tareas';
     }
 }
