@@ -1,25 +1,22 @@
-# Mis pendientes
+# Planificador de tareas - Frontend
 
-Aplicación web de planificación de tareas desarrollada durante el Sprint 1 del Bootcamp Full Stack Java.
+Proyecto individual realizado por Estefania Mancipe. Esta parte contiene la interfaz construida con HTML, CSS, Bootstrap y JavaScript.
 
-La aplicación cuenta con un formulario para ingresar el nombre, la descripción, la fecha de entrega y el estado de una tarea. También presenta una lista con cinco tareas de ejemplo y realiza validaciones básicas con JavaScript.
+## Funciones incluidas
 
-## Tecnologías utilizadas
+- Crear tareas con nombre, descripcion, fecha y estado.
+- Validar que los campos necesarios esten completos.
+- Marcar tareas como terminadas.
+- Eliminar tareas.
+- Guardar y recuperar tareas con `localStorage` (tarea 8).
 
-- HTML5
-- CSS3
-- Bootstrap 5
-- JavaScript
+## Archivos principales
 
-## Organización del Sprint
+- `index.html`: estructura de la pagina.
+- `css/styles.css`: estilos personalizados.
+- `js/taskManager.js`: clase que administra y guarda las tareas.
+- `js/index.js`: eventos del formulario y acciones de las tareas.
 
+## Ejecucion
 
-Figma: https://www.figma.com/proto/xmvsIKl0WgVHIFQlZhcvd1/VidaFit?node-id=4-2&t=gm7wYD5lntqsS1Bj-1
-
-
-Trello
-https://trello.com/b/BDh2gboo/proyecto-estefania
-
-## Deploy
-https://estefaniamancipem.github.io/Proyecto-Final-Estefania/
-
+Abrir esta carpeta en Visual Studio Code y ejecutar `index.html` con Live Server. La direccion usada normalmente es `http://127.0.0.1:5500`.
